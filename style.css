@@ -1,7 +1,7 @@
 :root {
   --bg-color: #4b4f55;
   --frame-color: #1e2024;
-  --number-color: #393b3f;
+  --number-color: #4a4c52;
   --operator-color: #303237;
   --text-color: #fff;
   --equals-color: #4cc2ff;
@@ -60,7 +60,7 @@ button {
   width: 400px;
   height: 600px;
   background-color: var(--frame-color);
-  margin: 200px auto;
+  margin: 200px auto 50px;
   padding: 5px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -178,10 +178,17 @@ sup {
   grid-row: 4 / span 6;
 }
 
+footer {
+  text-align: center;
+  font-weight: 100;
+  letter-spacing: 3px;
+  color: var(--text-color);
+}
+
 .light {
   --frame-color: #d3c7bb;
   --number-color: #fff7ee;
-  --operator-color: #fff1e2;
+  --operator-color: #ffecd6;
   --text-color: #55483d;
   --logo-color: #ceae8a;
   --bg-color: #fff8f2;

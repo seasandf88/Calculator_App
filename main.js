@@ -10,10 +10,10 @@ const clear = document.getElementById("clear");
 const clearEntry = document.getElementById("clearEntry");
 const erase = document.getElementById("erase");
 
-const times = document.getElementById("times");
-const divide = document.getElementById("divide");
-const plus = document.getElementById("plus");
-const minus = document.getElementById("minus");
+const times = document.getElementById("Multiply");
+const divide = document.getElementById("Divide");
+const plus = document.getElementById("Add");
+const minus = document.getElementById("Subtract");
 const equals = document.getElementById("equals");
 const percent = document.getElementById("percent");
 
@@ -33,21 +33,41 @@ lightMode.addEventListener("click", () => {
 });
 
 numbers.forEach((number) => {
-  number.addEventListener("click", (e) => {
-    if (e.target.getAttribute("id") === "negate") {
-      negate();
-      return;
-    }
+  number.addEventListener("click", (e) => numKey(e.target));
+});
 
-    if (operationActive) {
-      result.innerText = "";
-      result.innerText += number.innerHTML;
-      operationActive = false;
-    } else if (result.innerText.length < 16) {
-      result.innerText += number.innerHTML;
-    }
-    secondMem = Number(result.innerText);
-  });
+function numKey(target) {
+  if (target.getAttribute("id") === "negate") {
+    negate();
+    return;
+  }
+  if (target.getAttribute("id") === "Decimal") {
+    if (result.innerHTML.includes(".")) return;
+  }
+
+  if (operationActive) {
+    result.innerText = "";
+    result.innerText += target.innerHTML;
+    operationActive = false;
+  } else if (result.innerText.length < 16) {
+    result.innerText += target.innerHTML;
+  }
+  secondMem = Number(result.innerText);
+}
+
+document.addEventListener("keydown", (e) => {
+  let id = e.code.slice(6, e.code.length);
+  let target = document.getElementById(id);
+  if (
+    ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Decimal"].includes(id)
+  ) {
+    numKey(target);
+  } else if (["Add", "Multiply", "Subtract", "Divide"].includes(id)) {
+    opKey(target);
+  } else if (e.code === "NumpadEnter") {
+    equal(operation, firstMem, secondMem);
+  }
+  console.log(e.code);
 });
 
 clear.addEventListener("click", () => {
@@ -73,26 +93,28 @@ erase.addEventListener("click", () => {
 });
 
 operators.forEach((operator) => {
-  operator.addEventListener("click", (e) => {
-    if (e.target.getAttribute("id") === "fraction") {
-      fraction();
-      return;
-    }
-    if (e.target.getAttribute("id") === "squared") {
-      squared();
-      return;
-    }
-    if (e.target.getAttribute("id") === "root") {
-      root();
-      return;
-    }
-    firstMem && equal(operation, firstMem, secondMem);
-    firstMem = Number(result.innerText);
-    temp.innerText = result.innerText + operator.getAttribute("symbol");
-    operationActive = true;
-    operation = operator.getAttribute("operation");
-  });
+  operator.addEventListener("click", (e) => opKey(e.target));
 });
+
+function opKey(target) {
+  if (target.getAttribute("id") === "fraction") {
+    fraction();
+    return;
+  }
+  if (target.getAttribute("id") === "squared") {
+    squared();
+    return;
+  }
+  if (target.getAttribute("id") === "root") {
+    root();
+    return;
+  }
+  firstMem && equal(operation, firstMem, secondMem);
+  firstMem = Number(result.innerText);
+  temp.innerText = result.innerText + target.getAttribute("symbol");
+  operationActive = true;
+  operation = target.getAttribute("operation");
+}
 
 percent.addEventListener("click", () => {
   if (operation === "plus" || operation == "minus") {
@@ -129,7 +151,12 @@ function equal(operation, a, b) {
       result.innerText = Number(a) * Number(b);
     } else if (operation === "divide") {
       temp.innerText = a + " \xf7 " + b + "=";
-      result.innerText = Number(a) / Number(b);
+      if (b == "0") {
+        result.innerText = "Can't divide by zero";
+        return;
+      } else {
+        result.innerText = Number(a) / Number(b);
+      }
     } else if (operation === "percent") {
       let value = (Number(a) * Number(b)) / 100;
       temp.innerText = a + " \x25 " + value + "=";

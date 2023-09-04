@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&family=Roboto:wght@100;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculator App</title>
+  </head>
+  <body>
+    <main>
+      <div id="switch">
+        <!-- <button id="dark">Dark</button> -->
+        <button id="light">Dark</button>
+      </div>
+      <div class="container">
+        <div class="frame">
+          <div id="title">
+            <p>CALCULATOR</p>
+          </div>
+          <div id="screen">
+            <p id="temp"></p>
+            <p id="result"></p>
+          </div>
+          <div class="operators-1">
+            <button
+              symbol=" &#37; "
+              operation="percent"
+              id="percent"
+              class="control"
+            >
+              &#37;
+            </button>
+            <button id="clearEntry" class="control">CE</button>
+            <button id="clear" class="control">C</button>
+            <button id="erase" class="control">
+              <i class="fa-solid fa-delete-left"></i>
+            </button>
+            <button id="fraction" class="operator italic">
+              <sup>1</sup>/x
+            </button>
+            <button id="squared" class="operator italic">x<sup>2</sup></button>
+            <button id="root" class="operator italic">
+              <sup>2</sup>&radic;x
+            </button>
+            <button
+              symbol=" &divide; "
+              operation="divide"
+              id="divide"
+              class="operator"
+            >
+              &divide;
+            </button>
+          </div>
+          <div class="operators-2">
+            <button symbol=" x " operation="times" id="times" class="operator">
+              &times;
+            </button>
+            <button symbol=" - " operation="minus" id="minus" class="operator">
+              &minus;
+            </button>
+            <button symbol=" + " operation="plus" id="plus" class="operator">
+              &plus;
+            </button>
+            <button id="equals" class="equals">&equals;</button>
+          </div>
+          <div class="numbers">
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button id="negate" class="number">+/-</button>
+            <button class="number">0</button>
+            <button class="number">.</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
